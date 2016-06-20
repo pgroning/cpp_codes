@@ -21,23 +21,32 @@ bool fileExists(const string& filename)
 }
 
 
+
 int main(int argc, char* argv[])
 {
+  string inarg;
   
   //int n = sizeof(argv)/sizeof(*argv);
-  if (argc < 2) { // no input argument is given
+  if (argc > 2) { // Too many input argument are given
+    cout << "Error: Too many input arguments\n";
     exit(0);
   }
-  string inarg = argv[1];
-
-  // Check if file exists
-  bool exist = fileExists(inarg);
-  if (!exist) {
-    string errmsg = "lsp: cannot access '"+inarg+"'";
-    perror(errmsg.c_str());
-    exit(EXIT_FAILURE);
+  else if (argc == 2) {
+    inarg = argv[1];
+  }
+  else {
+    inarg = "";
   }
 
+  if(!inarg.empty()) { // Check if file exists
+    bool exist = fileExists(inarg);
+    if (!exist) {
+      string errmsg = "lsp: cannot access '"+inarg+"'";
+      perror(errmsg.c_str());
+      exit(EXIT_FAILURE);
+    }
+  }
+  
   char buffer[PATH_MAX+1];
   char *result = realpath("./", buffer);
   if (result) {
