@@ -1,3 +1,5 @@
+// Convert a relative to absolute file name. Works on *nix systems
+
 #include <iostream>
 #include <limits.h>
 #include <stdlib.h>
