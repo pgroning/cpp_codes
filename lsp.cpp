@@ -10,7 +10,7 @@
 using namespace std;
 
 
-bool fileExists(const std::string& filename)
+bool fileExists(const string& filename)
 {
     struct stat buf;
     if (stat(filename.c_str(), &buf) != -1)
