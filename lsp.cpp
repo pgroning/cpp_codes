@@ -32,7 +32,12 @@ void help()
 int main(int argc, char* argv[])
 {
   string inarg;
-  
+
+  if (argc < 2) { // No input argument is given
+    help();
+    exit(0);
+  }
+
   if (!strcmp(argv[1],"-h")) { // call help function
     help();
     exit(0);
@@ -51,6 +56,7 @@ int main(int argc, char* argv[])
     inarg = "";
   }
   */
+
 
   for (int i = 1; i < argc; i++) {
     
