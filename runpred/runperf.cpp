@@ -8,12 +8,14 @@ using namespace std;
 
 runperf::runperf()
 {
+  weightchange = 0.0;
 }
 
 runperf::runperf(float t, float d)
 {
   runtime = t;
   distance = d;
+  weightchange = 0.0;
 }
 
 void runperf::pace_calc()
@@ -44,6 +46,7 @@ void runperf::VO2max_calc(float t, float d)
   float percent_max = 0.8+0.1894393*exp(-0.012778*t)      \
     + 0.2989558*exp(-0.1932605*t);
   VO2max = VO2/percent_max;
+  VO2max = VO2max * (1.0 + weightchange); // Weight adjusted
 }
 
 
@@ -53,9 +56,10 @@ float runperf::get_VO2max()
 }
 
 
-void runperf::predict(float d)
+void runperf::predict(float d, float w)
 {
 
+  weightchange = w;
   distance_new = d;
   predtime = pace*distance_new;
   float predtime_lo = predtime*0.5;

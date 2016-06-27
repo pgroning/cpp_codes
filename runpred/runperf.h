@@ -12,7 +12,7 @@ class runperf
   void VO2max_calc();
   void VO2max_calc(float, float);
   float get_VO2max();
-  void predict(float);
+  void predict(float, float);
   float get_predtime();
   float get_predpace();
  private:
@@ -22,6 +22,7 @@ class runperf
   float pace;
   float VO2max;
   float predtime;
+  float weightchange;
 };
 
 #endif // RUNPERF_H
