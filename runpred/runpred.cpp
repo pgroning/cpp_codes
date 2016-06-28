@@ -94,7 +94,7 @@ float str2time(string str)
   if (p!=string::npos) { // match was found
     hour = min;
     min = sec;
-    stringstream(str.substr(0,p)) >> sec;
+    stringstream(str.substr(++p)) >> sec;
   }
   float runtime = hour*60 + min + sec/60; // minutes
 

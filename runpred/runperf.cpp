@@ -140,7 +140,7 @@ string runperf::get_predtime()
   int sec = int(round(predtime*60)) % 60;
   int min = int(predtime) % 60;
   int hours = int(predtime/60);
-
+  
   ss << sec;
   string sstr;
   if (sec < 10) {
