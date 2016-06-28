@@ -1,8 +1,15 @@
 CC=g++
 CFLAGS=-I.
+DEPS = runperf.h
+OBJ = runpred.o runperf.o
 
-runpred: runpred.o runperf.o
-	$(CC) -o runpred runpred.o runperf.o -I.
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+runpred: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
+
+.PHONY: clean
 
 clean:
 	rm -f *.o *~
