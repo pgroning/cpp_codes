@@ -5,13 +5,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include <string>
-#include <sstream>
+#include <sstream>  // used for stringstream
+#include <iomanip>  // used for setprecision
 
 //#include <limits.h>
-//#include <string>
 //#include <sys/stat.h>
 //#include <stdio.h>
-//#include <string.h>
 //#include <dirent.h>
 
 using namespace std;
@@ -56,15 +55,14 @@ int main(int argc, char* argv[])
 
   runperf run(runtime, distance);
   run.pace_calc();
-  cout << "Pace =  " << run.get_pace() << " min/km" << endl;
+  cout << "Pace =  " << run.get_pace() << " [m:ss]/km" << endl;
   run.VO2max_calc();
-  cout << "VO2max = " << run.get_VO2max() << endl;
+  cout << "VO2max = " << setprecision(4) << run.get_VO2max() << endl;
   if (distance_new >= 0) {
     cout << "----Performance prediction----\n";
     run.predict(distance_new, weightchange);
-    cout << weightchange << endl;
-    cout << "Predicted time = " << run.get_predtime() << endl; 
-    cout << "Predicted pace = " << run.get_predpace() << " min/km" << endl;
+    cout << "Predicted time = " << run.get_predtime() << " [h:mm:ss]\n"; 
+    cout << "Predicted pace = " << run.get_predpace() << " [m:ss]/km\n";
   }
   
 }
@@ -77,6 +75,6 @@ void help()
   cout << "-h     : Show this help message and exit\n";
   cout << "-t     : Running time\n";
   cout << "-d     : Running distance\n";
-  cout << "-p     : Running distance for time prediction\n";
-  cout << "-w     : Weight change in percentage\n";
+  cout << "-p     : Running distance for performance prediction\n";
+  cout << "-w     : Body weight change in percentage (for performance prediction)\n";
 }

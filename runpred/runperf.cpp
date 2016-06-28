@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <cmath>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -27,9 +29,28 @@ void runperf::pace_calc(float runtime, float distance)
   pace = runtime / distance;
 }
 
-float runperf::get_pace()
+string runperf::get_pace()
 {
-  return pace;
+  stringstream ms, ss;
+  
+  int sec = int(round(pace*60)) % 60;
+  int min = int(pace);
+
+  ss << sec;
+  string sstr;
+  if (sec < 10) {
+    sstr = "0" + ss.str();
+  } else {
+    sstr = ss.str();
+  }
+
+  ms << min;
+  string mstr = ms.str();
+
+  string pacestr = mstr + ":" + sstr;
+  return pacestr;
+
+  //return pace;
 }
 
 
@@ -89,13 +110,54 @@ void runperf::predict(float d, float w)
   
 }
 
-float runperf::get_predpace()
+string runperf::get_predpace()
 {
   float predpace = predtime/distance_new; 
-  return predpace;
+  stringstream ms, ss;
+
+  int sec = int(round(predpace*60)) % 60;
+  int min = int(predpace);
+
+  ss << sec;
+  string sstr;
+  if (sec < 10) {
+    sstr = "0" + ss.str();
+  } else {
+    sstr = ss.str();
+  }
+
+  ms << min;
+  string mstr = ms.str();
+
+  string pacestr = mstr + ":" + sstr;
+  return pacestr;
 }
 
-float runperf::get_predtime()
+string runperf::get_predtime()
 {
-  return predtime;
+  stringstream hs, ms, ss;
+
+  int sec = int(round(predtime*60)) % 60;
+  int min = int(predtime) % 60;
+  int hours = int(predtime/60);
+
+  ss << sec;
+  string sstr;
+  if (sec < 10) {
+    sstr = "0" + ss.str();
+  } else {
+    sstr = ss.str();
+  }
+  ms << min;
+  string mstr;
+  if (min < 10) {
+    mstr = "0" + ms.str();
+  } else {
+    mstr = ms.str();
+  }
+  hs << hours;
+  string hstr = hs.str();
+
+  string timestr = hstr + ":" + mstr + ":" + sstr;
+  return timestr;
 }
