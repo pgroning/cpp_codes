@@ -38,6 +38,10 @@ int main(int argc, char* argv[])
     if (!strcmp(argv[i],"-h")) {
       help();
       exit(0);
+    } else if (!strcmp(argv[i],"-tt")) {
+      timestr = argv[i+1];
+      
+      cout << timestr << endl;
     } else if (!strcmp(argv[i],"-t")) {
       timestr = argv[i+1];
       stringstream(timestr) >> runtime; //in minutes

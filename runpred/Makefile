@@ -1,5 +1,6 @@
 CC=g++
 CFLAGS=-I.
+CPPFLAGS=-std=c++0x
 DEPS = runperf.h
 OBJ = runpred.o runperf.o
 
