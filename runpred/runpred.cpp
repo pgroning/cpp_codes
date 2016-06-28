@@ -17,6 +17,7 @@ using namespace std;
 
 void help();
 
+float str2time(string);
 
 int main(int argc, char* argv[])
 {
@@ -38,13 +39,9 @@ int main(int argc, char* argv[])
     if (!strcmp(argv[i],"-h")) {
       help();
       exit(0);
-    } else if (!strcmp(argv[i],"-tt")) {
-      timestr = argv[i+1];
-      
-      cout << timestr << endl;
     } else if (!strcmp(argv[i],"-t")) {
       timestr = argv[i+1];
-      stringstream(timestr) >> runtime; //in minutes
+      runtime = str2time(timestr);
     } else if (!strcmp(argv[i],"-d")) {
       diststr = argv[i+1];
       stringstream(diststr) >> distance; //in km
@@ -81,4 +78,25 @@ void help()
   cout << "-d     : Running distance\n";
   cout << "-p     : Running distance for performance prediction\n";
   cout << "-w     : Body weight change in percentage (for performance prediction)\n";
+}
+
+float str2time(string str)
+{
+  float hour, min, sec;
+
+  hour = 0;
+  size_t p = str.find(":");
+  stringstream(str.substr(0,p)) >> min;
+  stringstream(str.substr(++p)) >> sec;
+  
+  str = str.substr(p);
+  p = str.find(":");
+  if (p!=string::npos) { // match was found
+    hour = min;
+    min = sec;
+    stringstream(str.substr(0,p)) >> sec;
+  }
+  float runtime = hour*60 + min + sec/60; // minutes
+
+  return runtime;
 }
