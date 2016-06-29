@@ -8,11 +8,6 @@
 #include <sstream>  // used for stringstream
 #include <iomanip>  // used for setprecision
 
-//#include <limits.h>
-//#include <sys/stat.h>
-//#include <stdio.h>
-//#include <dirent.h>
-
 using namespace std;
 
 void help();
@@ -77,7 +72,14 @@ void help()
   cout << "-t     : Running time\n";
   cout << "-d     : Running distance\n";
   cout << "-p     : Running distance for performance prediction\n";
-  cout << "-w     : Body weight change in percentage (for performance prediction)\n";
+  cout << "-w     : Body weight change in percentage (for performance prediction)\n\n";
+  cout << "Examples:\n";
+  cout << "Calculate the average pace and VO2max for a 5 km race with a duration of 21 minutes and 30 seconds.\n";
+  cout << "$ runpred -d 5 -t 21:30\n\n";
+  cout << "The same as above but also predict the duration of a 10 km race assuming constant VO2max.\n";
+  cout << "$ runpred -d 5 -t 21:30 -p 10\n\n";
+  cout << "The same as above but also account for a 2 percent body weight loss.\n";
+  cout << "$ runpred -d 5 -t 21:30 -p 10 -w -0.02\n";
 }
 
 float str2time(string str)
