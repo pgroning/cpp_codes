@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
   }
 
   /* Get input parameters */
-  for (int i = 1; i < argc; i++) {
+  for (int i = 1; i < argc; i+=2) {
     if (!strcmp(argv[i],"-h")) {
       help();
       exit(0);
@@ -46,6 +46,10 @@ int main(int argc, char* argv[])
     } else if (!strcmp(argv[i],"-w")) {
       diststr = argv[i+1];
       stringstream(diststr) >> weightchange; //in percent
+    }
+    else {
+      cout << "Error: Unrecognized input argument. Type -h for help.\n";
+      exit(0);
     }
   }
 
