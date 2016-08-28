@@ -1,4 +1,4 @@
-/* Running prediction program */
+/* Race time predictor */
 
 #include <iostream>
 #include <string.h>
@@ -24,8 +24,8 @@ int main(int argc, char* argv[])
   float distance_new = -1.0;
   float weightchange = 0.0;
   
-  if (argc == 1) { // no argument is given. call help function
-    help();
+  if (argc == 1) { // no argument is given.
+    cout << "Race time predictor.\nType -h for help.\n";
     exit(0);
   }
 
@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
     } else if (!strcmp(argv[i],"-w")) {
       diststr = argv[i+1];
       stringstream(diststr) >> weightchange; //in percent
-    } 
+    }
   }
 
   runperf run(runtime, distance);
