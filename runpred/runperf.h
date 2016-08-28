@@ -1,6 +1,5 @@
 #ifndef RUNPERF_H
 #define RUNPERF_H
-#include <string>
 
 class runperf
 {

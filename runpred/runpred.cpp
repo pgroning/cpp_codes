@@ -1,12 +1,12 @@
 /* Running prediction program */
 
-#include "runperf.h"
 #include <iostream>
 #include <string.h>
 #include <stdlib.h>
 #include <string>
 #include <sstream>  // used for stringstream
 #include <iomanip>  // used for setprecision
+#include "runperf.h"
 
 using namespace std;
 
