@@ -65,7 +65,8 @@ int main(int argc, char* argv[])
 
 void help()
 {
-  cout << "Prediction of running performance by calculating VO2max.\n\n";
+  cout << "Race time predictor.\n";
+  cout << "Prediction of running performance for a given distance assuming constant VO2max.\n\n";
   cout << "Usage: runpred [Options]... [ARGS]...\n\n";
   cout << "Options:\n";
   cout << "-h     : Show this help message and exit\n";
