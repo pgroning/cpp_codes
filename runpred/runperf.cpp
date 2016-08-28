@@ -50,7 +50,6 @@ string runperf::get_pace()
   string pacestr = mstr + ":" + sstr;
   return pacestr;
 
-  //return pace;
 }
 
 
