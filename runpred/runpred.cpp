@@ -80,6 +80,7 @@ void help()
   cout << "$ runpred -d 5 -t 21:30 -p 10\n\n";
   cout << "The same as above but also account for a 2 percent body weight loss.\n";
   cout << "$ runpred -d 5 -t 21:30 -p 10 -w -0.02\n";
+  cout << "\nWritten by P. Groningsson\n";
 }
 
 float str2time(string str)
