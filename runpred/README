@@ -1,0 +1,52 @@
+Beskrivning av programmet:
+
+Programmet räknar ut VO2max för en given löparprestation (distans och sluttid). 
+Från detta beräknade värde kan sluttiden för en annan distans uppskattas.
+En uppskattning på hur en förändring i löparens kroppsvikt påverkar sluttiden
+kan också göras.
+
+Installation:
+
+1. Packa upp zip-filen på lämpligt ställe:
+
+$ tar xvzf runpred.tgz
+
+Följande filer ska nu finnas:
+Makefile
+README
+runperf.cpp
+runperf.h
+runpred.cpp
+
+2. Kompilera programmet:
+
+$ make
+
+Nu ska den exekverbara filen runpred ha skapats.
+
+3. Information om hur programmet ska köras fås genom kommandot:
+
+$ ./runpred -h
+
+Race time predictor.
+Prediction of running performance for a given distance assuming constant VO2max.
+
+Usage: runpred [Options]... [ARGS]...
+
+Options:
+-h     : Show this help message and exit
+-t     : Running time
+-d     : Running distance
+-p     : Running distance for performance prediction
+-w     : Body weight change in percentage (for performance prediction)
+
+Examples:
+Calculate the average pace and VO2max for a 5 km race with a duration of 21 minutes and 30 seconds.
+$ runpred -d 5 -t 21:30
+
+The same as above but also predict the duration of a 10 km race assuming constant VO2max.
+$ runpred -d 5 -t 21:30 -p 10
+
+The same as above but also account for a 2 percent body weight loss.
+$ runpred -d 5 -t 21:30 -p 10 -w -0.02
+
