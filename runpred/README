@@ -1,9 +1,8 @@
 Beskrivning av programmet:
 
-Programmet räknar ut VO2max för en given löparprestation (distans och sluttid). 
-Från detta beräknade värde kan sluttiden för en annan distans uppskattas.
-En uppskattning på hur en förändring i löparens kroppsvikt påverkar sluttiden
-kan också göras.
+Programmet räknar ut VO2max för en given löparprestation (sträcka och sluttid). 
+Från detta beräknade värde kan sluttiden för en annan sträcka (givet samma typ av bana) uppskattas.
+En uppskattning på hur en förändring i löparens kroppsvikt påverkar sluttiden kan också göras.
 
 Installation:
 
@@ -22,7 +21,7 @@ runpred.cpp
 
 $ make
 
-Nu ska den exekverbara filen runpred ha skapats.
+Nu ska den exekverbara filen 'runpred' ha skapats.
 
 3. Information om hur programmet ska köras fås genom kommandot:
 
