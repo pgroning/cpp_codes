@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <math.h>
 
 using namespace std;
 
@@ -41,5 +42,19 @@ main()
 
     infile.close();
   }
+  
+  cout << "---------------" << endl;
+  infile.open("testfile.txt"); 
+  while (! infile.eof()) {
+    getline(infile,instr);
+    cout << instr << endl;
+  }
+  infile.close();
+  
+  cout << "-----------------" << endl;
+
+  double result = atan(1.0) * 180/PI;
+  cout << "arctan(1) = " << result << " degrees" << endl;
+
   return 0;
 }
