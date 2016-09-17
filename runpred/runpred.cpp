@@ -1,8 +1,8 @@
 /* Race time predictor */
 
 #include <iostream>
-#include <string.h>
-#include <stdlib.h>
+#include <string.h> // used for strcmp
+//#include <stdlib.h>
 #include <string>
 #include <sstream>  // used for stringstream
 #include <iomanip>  // used for setprecision

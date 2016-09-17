@@ -1,9 +1,9 @@
 #include <iostream>
-#include <string.h>
-#include <stdlib.h>
-#include <cmath>
+//#include <string.h>
+//#include <stdlib.h>
+#include <cmath> // used for round function
 #include <string>
-#include <sstream>
+#include <sstream> // used for stringstream
 #include "runperf.h"
 
 using namespace std;
