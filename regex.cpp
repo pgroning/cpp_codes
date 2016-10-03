@@ -1,3 +1,5 @@
+//Compile: $ g++ -std=c++11 regex.cpp
+
 #include <iostream>
 #include <fstream>
 #include <regex>
