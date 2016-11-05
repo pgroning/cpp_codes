@@ -1,0 +1,2 @@
+# Compile C++ md5 function:
+$ g++ run_md5.cpp md5.cpp -o md5_sample
