@@ -1,0 +1,15 @@
+#include <iostream>
+#include <boost/filesystem.hpp>
+
+using namespace std;
+using namespace boost::filesystem;
+
+int main() {
+  
+  path path("/home/per/mywork/cpp_codes/boost/README");
+  
+  cout << path.string() << endl;
+  cout << path.filename() << endl;
+  
+  return 0;
+}

@@ -1,2 +1,2 @@
-# Static linking:
-g++ -static <file.cpp>
+# Static linking boost library:
+g++ <file.cpp> -std=c++11 -static -lboost_system -lboost_filesystem
