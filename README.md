@@ -1,2 +1,2 @@
 # cpptest
-Small C++ programs only for testing purpose
+This is a collection of Small C++ programs
