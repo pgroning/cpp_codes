@@ -4,7 +4,7 @@
 using namespace std;
 using namespace boost::filesystem;
 
-int main() {
+int main(int argc, char* argv[]) {
   
   path path("../a.out");
   
