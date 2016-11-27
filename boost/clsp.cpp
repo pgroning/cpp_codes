@@ -18,8 +18,50 @@ int main(int argc, char* argv[]) {
   }
 
   path p(argc>1? argv[1] : ".");
+
+  if (p.is_absolute()) {
+    //cout << "This is an absolute path. Return relative path." << endl;
+
+    path wd("."); // current working directory
+    path pwd(absolute(wd));
+    if (p.root_directory() != pwd.root_directory()) {
+      cout << p.string() << endl; // return p if root paths are different
+    }
+    else {
+      
+      path::const_iterator fromIter = pwd.begin();
+      path::const_iterator toIter = p.begin();
+
+      // Loop through both paths as long as they are the same
+      while (fromIter != p.end() && toIter != pwd.end() && \
+	     (*toIter) == (*fromIter)) {
+	++toIter;
+	++fromIter;
+      }
+
+      path finalPath;
+      finalPath = ".";
+      ++fromIter;
+      while (fromIter != pwd.end()) {
+	finalPath /= "..";
+	++fromIter;
+      }
+      while (toIter != p.end()) {
+	finalPath /= *toIter;
+	++toIter;
+      }
+      
+      cout << finalPath.string() << endl;
+      
+    }
+    
+    
+    
+    exit(0);
+  }
+
   
-  if (is_directory(p)) {
+  if (is_directory(p)) { // list all files in directory
     cout << p << " is a directory containing:\n";
 
     for (auto& f : boost::make_iterator_range(directory_iterator(p), {})) {
@@ -61,8 +103,8 @@ int main(int argc, char* argv[]) {
 
 void help() {
   cout << "clsp:\n";
-  cout << "Converting relative to absolute file paths using the boost C++ \
-library.\n\n";
+  cout << "Converting relative to absolute (and vice versa) file paths using\
+ the boost C++\nlibrary.\n\n";
   cout << "Usage: clsp [Options]... [ARGS]...\n\n";
   cout << "Options:\n";
   cout << "-h     : Show this help message and exit\n";
