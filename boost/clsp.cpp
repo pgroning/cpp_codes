@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
       }
 
       path finalPath;
-      finalPath = ".";
+      //finalPath = ".";
       ++fromIter;
       while (fromIter != pwd.end()) {
 	finalPath /= "..";
@@ -55,14 +55,12 @@ int main(int argc, char* argv[]) {
       
     }
     
-    
-    
     exit(0);
   }
 
   
   if (is_directory(p)) { // list all files in directory
-    cout << p << " is a directory containing:\n";
+    //cout << p << " is a directory containing:\n";
 
     for (auto& f : boost::make_iterator_range(directory_iterator(p), {})) {
       cout << canonical(f.path()).string() << endl;
