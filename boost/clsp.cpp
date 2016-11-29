@@ -32,27 +32,26 @@ int main(int argc, char* argv[]) {
   for (int i = 1; i < n; i++) {
 
     path p(argc > 1 ? argv[i] : ".");
-    Dir dir(p);
+    Dir *d = new Dir(p);
     
-    if (dir.is_absolute()) {
-      cout << dir.rel_path().string() << endl;
+    if (d->is_absolute()) {
+      cout << d->rel_path().string() << endl;
       exit(0);
     }
   
-    if (is_directory(dir.get_path())) { // list all files in directory
-      dir.list_all();
+    if (is_directory(d->get_path())) { // list all files in directory
+      d->list_all();
     }
     else {
-      if (exists(dir.get_path())) {
-	cout << canonical(dir.get_path()).string() << endl;
-	//cout << canonical(p).string() << endl;
+      if (exists(d->get_path())) {
+	cout << canonical(d->get_path()).string() << endl;
       }
       else {
-	cout << "clsp: cannot access '" << dir.get_path().string() <<	\
+	cout << "clsp: cannot access '" << d->get_path().string() <<	\
 	  "' : No such file or directory\n";
       }
     }
-    
+    delete d;
   }
 
   /*
