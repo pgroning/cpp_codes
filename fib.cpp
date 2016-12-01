@@ -16,21 +16,21 @@ int fib(int n) {
 }
 
 
-int m[n];
+int mem[n] = {0};
 int fib2(int n) {
 
-  if (m[n] > 0) {
-    return m[n];
+  if (mem[n] > 0) {
+    return mem[n];
   }
   else {
     if (n <= 2) {
-      m[n] = 1;
+      mem[n] = 1;
     }
     else {
-      m[n] = fib2(n-1) + fib2(n-2);
+      mem[n] = fib2(n-1) + fib2(n-2);
     }
+    return mem[n];  
   }
-  return m[n];
 }
 
 int main() {
@@ -41,5 +41,4 @@ int main() {
   
   return 0;
 }
-
 
