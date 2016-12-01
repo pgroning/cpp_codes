@@ -1,9 +1,8 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
-int n = 47;
+const int n = 47;
 
 int fib(int n) {
   
@@ -17,7 +16,7 @@ int fib(int n) {
 }
 
 
-vector<int> m(n);
+int m[n];
 int fib2(int n) {
 
   if (m[n] > 0) {
