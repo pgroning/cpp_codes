@@ -8,6 +8,9 @@
 using namespace std;
 using namespace boost::filesystem;
 
+list<string> get_filelist(string path);
+list<long> get_sizelist(list<string> filelist);
+
 int main(int argc, char* argv[]) {
 
   list<string> filelist1;  // list of strings
@@ -37,14 +40,14 @@ int main(int argc, char* argv[]) {
   */
     
   
-  
+  /*
   // List all files recursivley and store in list
   try {
     for (recursive_directory_iterator end, dir(path1); dir != end; ++dir ) {
       //std::cout << dir->path().filename() << "\n"; // just last bit
       if (!is_directory(dir->path().string())) { // Store file path in list if not directory
 	filelist1.push_back(dir->path().string()); 
-	sizelist1.push_back(file_size(dir->path().string()));
+	//sizelist1.push_back(file_size(dir->path().string()));
       }
     } 
   } // catch 'permission denied' cases
@@ -61,8 +64,7 @@ int main(int argc, char* argv[]) {
   } // catch 'permission denied' cases
   catch(filesystem_error &ex){cout << ex.what() << "\n";}
 
-  
-  //filelist.sort();
+  filelist1.sort();
   
   //file_ptr = filelist.begin();
   //for (int i = 0; i < filelist.size(); i++)
@@ -80,13 +82,26 @@ int main(int argc, char* argv[]) {
   // list files and corresponding sizes
   //file_ptr = filelist.begin();
   
-  for (size_ptr1 = sizelist1.begin(); size_ptr1 != sizelist1.end(); size_ptr1++){
+  for (file_ptr1 = filelist1.begin(); file_ptr1 != filelist1.end(); file_ptr1++){
     //  cout << *file_ptr++ << endl;
-    cout << *size_ptr1 << endl;
+    cout << *file_ptr1 << endl;
   }
   cout << "Number of files: " << filelist1.size() << endl;
+  */
 
+  list<string> filelist = get_filelist(path1);
+  filelist.sort();
+  list<long> sizelist = get_sizelist(filelist);
+  size_ptr1 = sizelist.begin();
+  for (file_ptr1 = filelist.begin(); file_ptr1 != filelist.end(); file_ptr1++){
+    //  cout << *file_ptr++ << endl;
+    cout << *file_ptr1 << endl;
+    cout << "size : " << *size_ptr1++ << " B" << endl;
+  }
+  cout << "Number of files: " << filelist.size() << endl;
 
+  
+  
   
   //long imax = LONG_MAX;
   //cout << imax << endl;
@@ -98,4 +113,36 @@ int main(int argc, char* argv[]) {
   cout << *ptr++ << endl;
   cout << *ptr << endl;
   */
+}
+
+list<string> get_filelist(string path) {
+
+  list<string> filelist;
+
+  // List all files recursivley and store in list
+  try {
+    for (recursive_directory_iterator end, dir(path); dir != end; ++dir ) {
+      //std::cout << dir->path().filename() << "\n"; // just last bit
+      if (!is_directory(dir->path().string())) { // Store file path in list if not directory
+	filelist.push_back(dir->path().string()); 
+	//sizelist1.push_back(file_size(dir->path().string()));
+      }
+    } 
+  } // catch 'permission denied' cases
+  catch(filesystem_error &ex){cout << ex.what() << "\n";}
+  
+  return filelist;
+}
+
+
+list<long> get_sizelist(list<string> filelist) {
+
+  list<long> sizelist;
+  list<string>::iterator file_ptr;
+
+  for (file_ptr = filelist.begin(); file_ptr != filelist.end(); file_ptr++) {
+    sizelist.push_back(file_size(*file_ptr));
+  }
+  
+  return sizelist;
 }
