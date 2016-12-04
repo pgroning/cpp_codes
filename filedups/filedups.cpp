@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
       file_ptr2 = filelist2.begin();
       for (size_ptr2=sizelist2.begin(); size_ptr2!=sizelist2.end(); size_ptr2++) {
 	
-	if (*size_ptr1 == *size_ptr2) { // check if file sizes match
+	if (*size_ptr1 > 0  && *size_ptr1 == *size_ptr2) { // check if file sizes match
 	  cout << *size_ptr1 << " " << *size_ptr2 << endl;
 	  cout << *file_ptr1 << " " << *file_ptr2 << endl;
 	}
@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
       file_ptr2 = file_ptr1;
       file_ptr2++;
       for (; size_ptr2!=sizelist1.end(); size_ptr2++) {
-	if (*size_ptr1 == *size_ptr2) { // check if file sizes match
+	if (*size_ptr1 > 0 && *size_ptr1 == *size_ptr2) { // check if file sizes match
 	  cout << *size_ptr1 << " " << *size_ptr2 << endl;
 	  cout << *file_ptr1 << " " << *file_ptr2 << endl;
 	}
