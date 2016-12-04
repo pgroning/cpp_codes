@@ -15,8 +15,8 @@ int main(int argc, char* argv[]) {
 
   list<string> filelist1;  // list of strings
   list<string> filelist2;
-  list<string>::iterator file_ptr;
-  //list<string>::iterator file_ptr2;
+  list<string>::iterator file_ptr1;
+  list<string>::iterator file_ptr2;
   
   list<long> sizelist1;
   list<long> sizelist2;
@@ -40,82 +40,52 @@ int main(int argc, char* argv[]) {
   */
     
   
-  /*
-  // List all files recursivley and store in list
-  try {
-    for (recursive_directory_iterator end, dir(path1); dir != end; ++dir ) {
-      //std::cout << dir->path().filename() << "\n"; // just last bit
-      if (!is_directory(dir->path().string())) { // Store file path in list if not directory
-	filelist1.push_back(dir->path().string()); 
-	//sizelist1.push_back(file_size(dir->path().string()));
-      }
-    } 
-  } // catch 'permission denied' cases
-  catch(filesystem_error &ex){cout << ex.what() << "\n";}
-
-  try {
-    for (recursive_directory_iterator end, dir(path2); dir != end; ++dir ) {
-      //std::cout << dir->path().filename() << "\n"; // just last bit
-      if (!is_directory(dir->path().string())) { // Store file path in list if not directory
-	filelist2.push_back(dir->path().string()); 
-	sizelist2.push_back(file_size(dir->path().string()));
-      }
-    } 
-  } // catch 'permission denied' cases
-  catch(filesystem_error &ex){cout << ex.what() << "\n";}
-
-  filelist1.sort();
-  
-  //file_ptr = filelist.begin();
-  //for (int i = 0; i < filelist.size(); i++)
-  //  cout << *file_ptr++ << endl;
-
-  
-  
-  //file_ptr1 = filelist1.begin();
-  //for (file_ptr = filelist.begin(); file_ptr != filelist.end(); file_ptr++) {
-    //if (! is_directory(*file_ptr))
-    //sizelist.push_back(file_size(*file_ptr));
-    //cout << *file_ptr << " size " << file_size(*file_ptr) << " bytes"<< endl;
-  //}
-
-  // list files and corresponding sizes
-  //file_ptr = filelist.begin();
-  
-  for (file_ptr1 = filelist1.begin(); file_ptr1 != filelist1.end(); file_ptr1++){
-    //  cout << *file_ptr++ << endl;
-    cout << *file_ptr1 << endl;
-  }
-  cout << "Number of files: " << filelist1.size() << endl;
-  */
-
   filelist1 = get_filelist(path1);
   // get file sizes and store results in a list
-  for (file_ptr = filelist1.begin(); file_ptr != filelist1.end(); file_ptr++) {
-    sizelist1.push_back(file_size(*file_ptr));
+  for (file_ptr1 = filelist1.begin(); file_ptr1 != filelist1.end(); file_ptr1++) {
+    sizelist1.push_back(file_size(*file_ptr1));
   }
 
-  if (argc > 2) {
+  if (argc > 2) { // compare files between two file trees
     filelist2 = get_filelist(path2);
-    for (file_ptr = filelist2.begin(); file_ptr != filelist2.end(); file_ptr++) {
-      sizelist2.push_back(file_size(*file_ptr));
+    for (file_ptr2 = filelist2.begin(); file_ptr2 != filelist2.end(); file_ptr2++)
+      sizelist2.push_back(file_size(*file_ptr2));
+   
+    file_ptr1 = filelist1.begin();
+    for (size_ptr1=sizelist1.begin(); size_ptr1!=sizelist1.end(); size_ptr1++) {
+      
+      file_ptr2 = filelist2.begin();
+      for (size_ptr2=sizelist2.begin(); size_ptr2!=sizelist2.end(); size_ptr2++) {
+	
+	if (*size_ptr1 == *size_ptr2) { // check if file sizes match
+	  cout << *size_ptr1 << " " << *size_ptr2 << endl;
+	  cout << *file_ptr1 << " " << *file_ptr2 << endl;
+	}
+	file_ptr2++;
+      }
+      file_ptr1++;
+    }
+      
+  }
+  else { // compare files within a single file tree
+    file_ptr1 = filelist1.begin();
+    for (size_ptr1=sizelist1.begin(); size_ptr1!=sizelist1.end(); size_ptr1++) {
+      size_ptr2 = size_ptr1;
+      size_ptr2++;  // avoid comparing a file against itself
+      file_ptr2 = file_ptr1;
+      file_ptr2++;
+      for (; size_ptr2!=sizelist1.end(); size_ptr2++) {
+	if (*size_ptr1 == *size_ptr2) { // check if file sizes match
+	  cout << *size_ptr1 << " " << *size_ptr2 << endl;
+	  cout << *file_ptr1 << " " << *file_ptr2 << endl;
+	}
+	file_ptr2++;
+      }
+      file_ptr1++;
     }
   }
-
   
-  
-  /*
-  list<long> sizelist = get_sizelist(filelist);
-  size_ptr1 = sizelist.begin();
-  for (file_ptr1 = filelist.begin(); file_ptr1 != filelist.end(); file_ptr1++){
-    //  cout << *file_ptr++ << endl;
-    cout << *file_ptr1 << endl;
-    cout << "size : " << *size_ptr1++ << " B" << endl;
-  }
-  cout << "Number of files: " << filelist.size() << endl;
-  */
-  
-  
+  // cout << "Number of files: " << filelist.size() << endl;
   
   //long imax = LONG_MAX;
   //cout << imax << endl;
