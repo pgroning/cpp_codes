@@ -15,8 +15,8 @@ int main(int argc, char* argv[]) {
 
   list<string> filelist1;  // list of strings
   list<string> filelist2;
-  list<string>::iterator file_ptr1;
-  list<string>::iterator file_ptr2;
+  list<string>::iterator file_ptr;
+  //list<string>::iterator file_ptr2;
   
   list<long> sizelist1;
   list<long> sizelist2;
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
   list<long>::iterator size_ptr2;
 
   string path1 = argc > 1 ? argv[1] : ".";
-  string path2 = argc > 2 ? argv[2] : path1;
+  string path2 = argc > 2 ? argv[2] : "";
   
   cout << "Find duplicte files under directories: " << endl;
   cout << path1 <<  endl;
@@ -89,8 +89,22 @@ int main(int argc, char* argv[]) {
   cout << "Number of files: " << filelist1.size() << endl;
   */
 
-  list<string> filelist = get_filelist(path1);
-  filelist.sort();
+  filelist1 = get_filelist(path1);
+  // get file sizes and store results in a list
+  for (file_ptr = filelist1.begin(); file_ptr != filelist1.end(); file_ptr++) {
+    sizelist1.push_back(file_size(*file_ptr));
+  }
+
+  if (argc > 2) {
+    filelist2 = get_filelist(path2);
+    for (file_ptr = filelist2.begin(); file_ptr != filelist2.end(); file_ptr++) {
+      sizelist2.push_back(file_size(*file_ptr));
+    }
+  }
+
+  
+  
+  /*
   list<long> sizelist = get_sizelist(filelist);
   size_ptr1 = sizelist.begin();
   for (file_ptr1 = filelist.begin(); file_ptr1 != filelist.end(); file_ptr1++){
@@ -99,7 +113,7 @@ int main(int argc, char* argv[]) {
     cout << "size : " << *size_ptr1++ << " B" << endl;
   }
   cout << "Number of files: " << filelist.size() << endl;
-
+  */
   
   
   
@@ -130,19 +144,7 @@ list<string> get_filelist(string path) {
     } 
   } // catch 'permission denied' cases
   catch(filesystem_error &ex){cout << ex.what() << "\n";}
-  
+
+  filelist.sort();
   return filelist;
-}
-
-
-list<long> get_sizelist(list<string> filelist) {
-
-  list<long> sizelist;
-  list<string>::iterator file_ptr;
-
-  for (file_ptr = filelist.begin(); file_ptr != filelist.end(); file_ptr++) {
-    sizelist.push_back(file_size(*file_ptr));
-  }
-  
-  return sizelist;
 }
