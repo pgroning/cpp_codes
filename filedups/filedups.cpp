@@ -92,10 +92,10 @@ int main(int argc, char* argv[]) {
     }
   }
 
+  file_ptr1 = matchlist1.begin();
   file_ptr2 = matchlist2.begin();
-  for (file_ptr1 = matchlist1.begin(); file_ptr1 != matchlist1.end(); file_ptr1++) {
+  for (; file_ptr1 != matchlist1.end(); file_ptr1++, file_ptr2++) {
     cout << *file_ptr1 << " : " << *file_ptr2 << endl;
-    file_ptr2++;
   }
   
   // cout << "Number of files: " << filelist.size() << endl;
