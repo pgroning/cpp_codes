@@ -23,6 +23,9 @@ int main(int argc, char* argv[]) {
   list<long>::iterator size_ptr1;
   list<long>::iterator size_ptr2;
 
+  list<string> matchlist1;
+  list<string> matchlist2;
+  
   string path1 = argc > 1 ? argv[1] : ".";
   string path2 = argc > 2 ? argv[2] : "";
   
@@ -58,8 +61,10 @@ int main(int argc, char* argv[]) {
       for (size_ptr2=sizelist2.begin(); size_ptr2!=sizelist2.end(); size_ptr2++) {
 	
 	if (*size_ptr1 > 0  && *size_ptr1 == *size_ptr2) { // check if file sizes match
-	  cout << *size_ptr1 << " " << *size_ptr2 << endl;
-	  cout << *file_ptr1 << " " << *file_ptr2 << endl;
+	  matchlist1.push_back(*file_ptr1);
+	  matchlist2.push_back(*file_ptr2);
+	  //cout << *size_ptr1 << " " << *size_ptr2 << endl;
+	  //cout << *file_ptr1 << " " << *file_ptr2 << endl;
 	}
 	file_ptr2++;
       }
@@ -76,13 +81,21 @@ int main(int argc, char* argv[]) {
       file_ptr2++;
       for (; size_ptr2!=sizelist1.end(); size_ptr2++) {
 	if (*size_ptr1 > 0 && *size_ptr1 == *size_ptr2) { // check if file sizes match
-	  cout << *size_ptr1 << " " << *size_ptr2 << endl;
-	  cout << *file_ptr1 << " " << *file_ptr2 << endl;
+	  matchlist1.push_back(*file_ptr1);
+	  matchlist2.push_back(*file_ptr2);
+	  //cout << *size_ptr1 << " " << *size_ptr2 << endl;
+	  //cout << *file_ptr1 << " " << *file_ptr2 << endl;
 	}
 	file_ptr2++;
       }
       file_ptr1++;
     }
+  }
+
+  file_ptr2 = matchlist2.begin();
+  for (file_ptr1 = matchlist1.begin(); file_ptr1 != matchlist1.end(); file_ptr1++) {
+    cout << *file_ptr1 << " : " << *file_ptr2 << endl;
+    file_ptr2++;
   }
   
   // cout << "Number of files: " << filelist.size() << endl;
