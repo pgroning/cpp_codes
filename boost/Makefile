@@ -1,5 +1,5 @@
 clsp: clsp.cpp
-	g++ -o clsp clsp.cpp -std=c++11 -static -lboost_system -lboost_filesystem -I.
+	g++ -o clsp.exe clsp.cpp -std=c++11 -lboost_system -lboost_filesystem -I.
 
 .PHONY: clean
 
